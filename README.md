@@ -10,5 +10,7 @@ Programming language used: Groovy
 Tool: SoapUI
 
 2 files are there:
+
 testCaseFetchData: This groovy script is responsible for fetching the data from real time CUCM devices.
+
 webServiceMock: This groovy script is responsible for mocking of the web service and giving response data depending upon the data being fetched by testCaseFetchData from real time CUCM devices.
