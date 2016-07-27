@@ -1,0 +1,76 @@
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+def holder = groovyUtils.getXmlHolder(mockRequest.requestContent)
+
+def soapObj = String.valueOf(holder.getNodeValue("perfmonCollectCounterData/Object"))
+
+def myFileStuff = String.valueOf("")
+
+def getVal
+if(soapObj == "Cisco CallManager")
+{
+
+	     log.info("Object received: Cisco CallManager")
+	     // Code for pushing data of file into mock response
+	     log.info("Geting data from XML file of actualy device response")
+	     BufferedReader br = null;
+	   
+
+    try {
+
+        String sCurrentLine = "";
+       
+
+        br = new BufferedReader(new FileReader("C:/testlab/CM-Cisco_CallManager.xml"));
+
+        while ((sCurrentLine = br.readLine()) != null) {
+            myFileStuff += sCurrentLine;
+          
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (br != null)br.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+}
+
+else if(soapObj == "Cisco SIP")
+{
+	log.info("Object received: Cisco SIP")
+	     // Code for pushing data of file into mock response
+	     log.info("Geting data from XML file of actualy device response")
+	     BufferedReader br = null;
+
+    try {
+
+        String sCurrentLine = "";
+
+        br = new BufferedReader(new FileReader("C:/testlab/CM-Cisco_SIP.xml"));
+        
+		while ((sCurrentLine = br.readLine()) != null) {
+            myFileStuff += sCurrentLine;
+          
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (br != null)br.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+
+else
+{
+	log.info("O boy! Device is not recognized")
+}
+
+	requestContext.res = myFileStuff

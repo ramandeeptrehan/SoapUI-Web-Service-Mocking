@@ -1,0 +1,8 @@
+import com.eviware.soapui.support.*; 
+def testCase = testRunner.getTestCase()
+fileName=testCase.getName()
+
+def xmlResponse = "C:/testlab/"+fileName+".xml"
+def response = context.expand( '${perfmonCollectCounterData#Response}' )
+def res = new File(xmlResponse)
+res.write(response,"UTF-8")
